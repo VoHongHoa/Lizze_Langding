@@ -1,0 +1,33 @@
+.product-tab-container {
+  .product-tab-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: gainsboro;
+    padding: 15px;
+    .product-tab-nav-title {
+      font-size: larger;
+      font-weight: bold;
+      opacity: 0.7;
+    }
+    .product-tab-nav-option {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 40px;
+      .product-tab-nav-option-title {
+        font-weight: 600;
+        &:hover {
+          color: green;
+        }
+      }
+      .active {
+        color: green;
+      }
+      .product-tab-nav-view-all {
+      }
+    }
+  }
+  .product-tab-main {
+  }
+}

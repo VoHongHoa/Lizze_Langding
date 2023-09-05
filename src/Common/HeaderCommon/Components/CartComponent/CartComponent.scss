@@ -1,0 +1,34 @@
+.cart-component {
+  position: relative;
+  .cart-container {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    width: 400px;
+    padding: 10px;
+    .cart-footer {
+      flex-direction: column;
+      gap: 20px;
+      .card-footer-infor {
+        justify-content: space-between;
+      }
+      .card-footer-action {
+        justify-content: space-between;
+        button {
+          width: 40%;
+          padding: 10px;
+        }
+      }
+    }
+  }
+  .tag-cart {
+    position: absolute;
+    right: -10px;
+    top: -5px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+  }
+}

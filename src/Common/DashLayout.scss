@@ -1,0 +1,21 @@
+.common-layout {
+  width: 100%;
+  margin: 0 auto;
+  .header-container {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+  }
+  .pd-2 {
+    padding: 10px;
+  }
+  .mg-2 {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 768px) {
+  /* Áp dụng các luật CSS cho màn hình nhỏ hơn hoặc bằng 768px */
+  .common-layout {
+    width: 100%;
+  }
+}
