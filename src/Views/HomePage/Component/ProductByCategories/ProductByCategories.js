@@ -3,9 +3,9 @@ import * as ProductService from "../../../../Service/ProductService";
 import ProductItem from "../../../../Common/ProductItem/ProductItem";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
-
 import "./ProductByCategories.scss";
 import ProductTabPanel from "../../../../Common/ProductTabPanel/ProductTabPanel";
+
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -50,7 +50,7 @@ function PrevArrow(props) {
           left: "-40px",
           fontSize: "15px",
           color: "white",
-          zIndex: 1000,
+          zIndex: 1,
         }}
       />
     </div>
@@ -92,7 +92,7 @@ const ProductByCategories = (props) => {
     className: "center",
     // centerMode: true,
     infinite: true,
-    slidesToShow: processProductData.length > 3 ? 6 : processProductData.length,
+    slidesToShow: processProductData.length > 6 ? 6 : processProductData.length,
     speed: 500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,

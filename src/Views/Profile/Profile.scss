@@ -1,0 +1,38 @@
+.profile-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .left-container {
+    width: 20%;
+    .main-infor {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .profile-menu {
+      ul {
+        list-style: none;
+        padding: 0;
+        background-color: white;
+
+        li {
+          padding: 13px;
+          border: 1px solid gray;
+          cursor: pointer;
+        }
+
+        .active {
+          background-color: green;
+          color: white;
+        }
+      }
+    }
+  }
+  .right-container {
+    width: 75%;
+  }
+}

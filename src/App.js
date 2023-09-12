@@ -10,6 +10,9 @@ import Promotion from "./Views/Promotion/Promotion";
 import News from "./Views/News/News";
 import Contact from "./Views/Contact/Contact";
 import { useSelector } from "react-redux";
+import CheckoutPage from "./Views/CheckoutPage/CheckoutPage";
+import CartPage from "./Views/CartPage/CartPage";
+import Profile from "./Views/Profile/Profile";
 function App() {
   const { user } = useSelector((state) => state);
   return (
@@ -21,6 +24,14 @@ function App() {
         <Route path="/khuyen-mai" element={<Promotion />} />
         <Route path="/tin-tuc" element={<News />} />
         <Route path="/lien-he" element={<Contact />} />
+        <Route path="/thanh-toan" element={<CheckoutPage />} />
+        <Route path="/gio-hang" element={<CartPage />} />
+        <Route
+          path="/ho-so-ca-nhan"
+          element={
+            user && user.isLogin ? <Profile /> : <Navigate to="/dang-nhap" />
+          }
+        />
       </Route>
       <Route
         path="/dang-nhap"

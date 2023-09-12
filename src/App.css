@@ -43,9 +43,13 @@
 }
 .btn-common {
   background-color: green;
-  color: white;
+  color: white !important;
+  padding: 10px !important;
 }
 .mgbt-2 {
   margin-bottom: 20px;
   margin-top: 10px;
+}
+.mgb-1 {
+  margin-bottom: 10px;
 }

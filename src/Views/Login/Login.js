@@ -18,7 +18,7 @@ const Login = () => {
   };
   const [activeRightPanel, setActiveRightPanel] = useState(true);
   const [data, setData] = useState({
-    customerName: "",
+    customerCode: "",
     password: "",
     email: "",
   });
@@ -26,7 +26,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleGotoSignUp = () => {
     setData({
-      customerName: "",
+      customerCode: "",
       password: "",
       email: "",
     });
@@ -34,7 +34,7 @@ const Login = () => {
   };
   const handleGotoSignIn = () => {
     setData({
-      customerName: "",
+      customerCode: "",
       password: "",
       email: "",
     });
@@ -42,9 +42,9 @@ const Login = () => {
   };
   const handleSignIn = async () => {
     try {
-      if (data.customerName !== "" && data.password !== "") {
+      if (data.customerCode !== "" && data.password !== "") {
         const formData = {
-          customerName: data.customerName.toString(),
+          customerCode: data.customerCode.toString(),
           password: data.password.toString(),
         };
         const res = await CustomerService.customerSignIn(formData);
@@ -71,12 +71,12 @@ const Login = () => {
   const handleSignup = async () => {
     try {
       if (
-        data.customerName !== "" &&
+        data.customerCode !== "" &&
         data.password !== "" &&
         data.email !== ""
       ) {
         const formData = {
-          customerName: data.customerName.toString(),
+          customerCode: data.customerCode.toString(),
           email: data.email.toString(),
           password: data.password.toString(),
         };
@@ -126,8 +126,8 @@ const Login = () => {
           <span>Hoặc đăng ký tài khoản với số điện thoại</span>
           <input
             type="text"
-            placeholder="Tên đăng nhập"
-            onChange={(e) => handleOnchangeInput("customerName", e)}
+            placeholder="Mã người dùng"
+            onChange={(e) => handleOnchangeInput("customerCode", e)}
           />
           <input
             type="email"
@@ -153,7 +153,7 @@ const Login = () => {
           <input
             type="text"
             placeholder="Tên đăng nhập"
-            onChange={(e) => handleOnchangeInput("customerName", e)}
+            onChange={(e) => handleOnchangeInput("customerCode", e)}
           />
           <input
             type="password"

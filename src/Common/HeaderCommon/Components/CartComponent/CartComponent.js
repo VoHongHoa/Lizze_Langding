@@ -2,15 +2,25 @@ import React, { useState } from "react";
 import { ShoppingOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import CartItem from "../../../CartItem/CartItem";
+
 import "./CartComponent.scss";
+import { useNavigate } from "react-router-dom";
+
 const CartComponent = () => {
   const { user, cart } = useSelector((state) => state);
   const [cartState, setCartState] = useState(false);
+  const navigate = useNavigate();
   const handleShowCart = () => {
     setCartState(true);
   };
   const handleCloseCart = () => {
     setCartState(false);
+  };
+  const handleGoToCheckoutPage = () => {
+    navigate("/thanh-toan");
+  };
+  const handleGoToDetailCart = () => {
+    navigate("/gio-hang");
   };
   return (
     <div
@@ -21,6 +31,7 @@ const CartComponent = () => {
       <ShoppingOutlined
         className="pointer"
         style={{ fontSize: "30px", color: "white" }}
+        onClick={handleGoToDetailCart}
       />
       <div className="tag-cart">
         <span>{cart.totalQuantity}</span>
@@ -62,8 +73,18 @@ const CartComponent = () => {
                   </span>
                 </div>
                 <div className="card-footer-action display-flex">
-                  <button className="btn-common pointer">Xem giỏ hàng</button>
-                  <button className="btn-common pointer">Thanh toán</button>
+                  <button
+                    className="btn-common pointer"
+                    onClick={handleGoToDetailCart}
+                  >
+                    Xem giỏ hàng
+                  </button>
+                  <button
+                    className="btn-common pointer"
+                    onClick={handleGoToCheckoutPage}
+                  >
+                    Thanh toán
+                  </button>
                 </div>
               </div>
             </>

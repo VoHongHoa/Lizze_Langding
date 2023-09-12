@@ -1,0 +1,76 @@
+.shipping-information-container {
+  .shipping-information-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10%;
+    .information {
+      width: 60%;
+      .main-infor {
+        // display: flex;
+        // flex-direction: row;
+        // flex-wrap: wrap;
+        // justify-content: space-between;
+        border: 1px solid grey;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      .w-100 {
+        width: 100%;
+      }
+      .w-50 {
+        width: 49%;
+      }
+      .pd-10 {
+        padding: 10px;
+      }
+      .mgt-10 {
+        margin-top: 10px;
+      }
+      input {
+        padding: 10px;
+        margin-top: 15px;
+      }
+      .information-name {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .shipping-information-action {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        .link {
+          &:hover {
+            color: green;
+            cursor: pointer;
+          }
+        }
+        .shipping-information-action_btn {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+      }
+    }
+    .oder-container {
+      width: 30%;
+    }
+  }
+  .title {
+    font-size: xx-large;
+    text-align: center;
+  }
+}
+
+.information-tag {
+  font-size: larger;
+  font-weight: bold;
+}

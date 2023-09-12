@@ -1,46 +1,30 @@
-import React, { useMemo, useState } from "react";
-import { Avatar, Dropdown, Layout, Menu } from "antd";
+import React, { useEffect, useState } from "react";
+import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./HeaderCommon.scss";
 import { Modules } from ".";
-import { useSelector, useDispatch } from "react-redux";
 import Search from "antd/es/input/Search";
-import {
-  BellFilled,
-  ShoppingOutlined,
-  UserOutlined,
-  PoweroffOutlined,
-  HeartOutlined,
-} from "@ant-design/icons";
-import { logout } from "../../redux/userSlice";
+import { BellFilled, HeartOutlined } from "@ant-design/icons";
 import CartComponent from "./Components/CartComponent/CartComponent";
-const { Header } = Layout;
+import UserComponent from "./Components/UserComponent/UserComponent";
+import { useDispatch } from "react-redux";
 
 function HeaderCommon(props) {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const currentPath = location.pathname;
   const [selectedItem, setSelectedItem] = useState(currentPath);
   const handleChangeNaviga = (key) => {
     setSelectedItem(key);
     navigate(key);
   };
-  const { user } = useSelector((state) => state);
-  const handleGoToLogin = () => {
-    navigate("/dang-nhap");
-  };
 
-  const items = [
-    {
-      key: "1",
-      label: (
-        <span className="span-inline" onClick={() => dispatch(logout())}>
-          <PoweroffOutlined style={{ fontSize: 16 }} /> Đăng xuất
-        </span>
-      ),
-    },
-  ];
+  useEffect(() => {
+    setSelectedItem(currentPath);
+  }, [currentPath]);
+
   return (
     <div className="header-container">
       <div className="top-header-container">
@@ -62,26 +46,8 @@ function HeaderCommon(props) {
             className="pointer"
             style={{ fontSize: "30px", color: "white" }}
           />
-          <CartComponent />
-          {user && user.isLogin ? (
-            <div className="user_action">
-              <Dropdown
-                overlayClassName="dropdown-container"
-                menu={{ items }}
-                placement="bottomRight"
-                arrow={true}
-              >
-                <Avatar
-                  className="pointer"
-                  src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=3"
-                />
-              </Dropdown>
-            </div>
-          ) : (
-            <span className="white-text pointer" onClick={handleGoToLogin}>
-              Đăng nhập
-            </span>
-          )}
+          <CartComponent navigate={navigate} dispatch={dispatch} />
+          <UserComponent dispatch={dispatch} navigate={navigate} />
         </div>
       </div>
       <div className="bottom-header-container">
