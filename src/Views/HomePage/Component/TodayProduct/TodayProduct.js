@@ -50,7 +50,6 @@ function PrevArrow(props) {
           left: "-40px",
           fontSize: "15px",
           color: "white",
-          zIndex: 1000,
         }}
       />
     </div>
@@ -61,12 +60,18 @@ const TodayProduct = (props) => {
 
   const getAllproducts = useCallback(async () => {
     const res = await ProductsService.getAllProducts();
-
     if (res && res.status === 200 && res.data.success === true) {
-      console.log(res.data.products);
       setProducts(res.data.products);
     }
   }, []);
+
+  const getProductBestSeller = async () => {
+    const res = await ProductsService.getProductsBestSeller();
+    if (res && res.status === 200 && res.data.success === true) {
+      console.log("check product", res.data.products);
+      setProducts(res.data.products);
+    }
+  };
   const processData = useMemo(() => {
     if (products.length < 1) {
       return [];
@@ -79,9 +84,8 @@ const TodayProduct = (props) => {
         price: item.price,
         category: item.CategoriesObject?.categoriesName,
         productImage: item.productImage,
-        color: item.color,
-        description: item.description,
-        size: item.size,
+        // color: item.color,
+        // size: item.size,
       };
     });
   }, [products]);
@@ -91,7 +95,7 @@ const TodayProduct = (props) => {
   const settings = {
     className: "center",
     // centerMode: true,
-    infinite: true,
+    infinite: false,
     slidesToShow: 6,
     speed: 500,
     nextArrow: <NextArrow />,
@@ -99,7 +103,11 @@ const TodayProduct = (props) => {
   };
   return (
     <div className="today-product">
-      <ProductTabPanel tabTitle={"Sản phẩm hôm nay"}>
+      <ProductTabPanel
+        tabTitle={"Sản phẩm hôm nay"}
+        getProducts={getAllproducts}
+        getProductBestSeller={getProductBestSeller}
+      >
         <Slider {...settings}>
           {processData &&
             processData.length > 0 &&

@@ -15,7 +15,6 @@ export const cartSlice = createSlice({
       const foundProduct = state.products.find(
         (item) => item.productCode === newProduct.productCode
       );
-      console.log(foundProduct);
       if (!!foundProduct) {
         foundProduct.quantity = foundProduct.quantity + 1;
       } else {

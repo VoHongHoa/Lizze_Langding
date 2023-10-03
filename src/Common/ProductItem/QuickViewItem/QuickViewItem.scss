@@ -1,0 +1,35 @@
+.modal-quick-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .left-container {
+    width: 30%;
+    .img-container {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .right-container {
+    width: 70%;
+    .main-infor {
+      span {
+      }
+      .product-other-infor {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+    }
+
+    .price {
+      color: red;
+      font-size: xx-large;
+      font-weight: bold;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    }
+  }
+}

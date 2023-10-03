@@ -53,3 +53,15 @@
 .mgb-1 {
   margin-bottom: 10px;
 }
+
+.vertical-divider {
+  height: 20px;
+  border: 1px solid gray;
+}
+
+.price {
+  color: red;
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

@@ -18,8 +18,20 @@ const ProductTabPanel = (props) => {
     },
   ];
   const handleChangeTab = (item) => {
-    console.log(item);
     setActiveTab(item.key);
+    switch (item.key) {
+      case "Best-Seller-Products":
+        props.getProductBestSeller();
+        break;
+      case "New-Products":
+        props.getProducts();
+        break;
+      case "Hàng phổ biến":
+        props.getProductBestSeller();
+        break;
+      default:
+        break;
+    }
   };
   return (
     <div className="product-tab-container">

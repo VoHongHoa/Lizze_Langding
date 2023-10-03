@@ -50,7 +50,6 @@ function PrevArrow(props) {
           left: "-40px",
           fontSize: "15px",
           color: "white",
-          zIndex: 1,
         }}
       />
     </div>
@@ -58,6 +57,7 @@ function PrevArrow(props) {
 }
 const ProductByCategories = (props) => {
   const [products, setProducts] = useState([]);
+
   const getProductsByCategories = useCallback(async () => {
     const res = await ProductService.getProductsByCategory(
       props.categories.categoriesCode
@@ -66,6 +66,15 @@ const ProductByCategories = (props) => {
       setProducts(res.data.products);
     }
   }, []);
+
+  const getProductBestSeller = async () => {
+    const res = await ProductService.getProductsBestSeller(
+      props.categories.categoriesCode
+    );
+    if (res && res.status === 200 && res.data.success === true) {
+      setProducts(res.data.products);
+    }
+  };
 
   const processProductData = useMemo(() => {
     if (products.length < 1) {
@@ -79,9 +88,9 @@ const ProductByCategories = (props) => {
         price: item.price,
         category: item.CategoriesObject?.categoriesName,
         productImage: item.productImage,
-        color: item.color,
-        description: item.description,
-        size: item.size,
+        // color: item.color,
+        // description: item.description,
+        // size: item.size,
       };
     });
   }, [products]);
@@ -91,7 +100,7 @@ const ProductByCategories = (props) => {
   const settings = {
     className: "center",
     // centerMode: true,
-    infinite: true,
+    infinite: false,
     slidesToShow: processProductData.length > 6 ? 6 : processProductData.length,
     speed: 500,
     nextArrow: <NextArrow />,
@@ -99,7 +108,11 @@ const ProductByCategories = (props) => {
   };
   return (
     <div className="today-product">
-      <ProductTabPanel tabTitle={props.tabTitle}>
+      <ProductTabPanel
+        tabTitle={props.tabTitle}
+        getProducts={getProductsByCategories}
+        getProductBestSeller={getProductBestSeller}
+      >
         <Slider {...settings}>
           {processProductData &&
             processProductData.length > 0 &&

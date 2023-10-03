@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import CheckoutPage from "./Views/CheckoutPage/CheckoutPage";
 import CartPage from "./Views/CartPage/CartPage";
 import Profile from "./Views/Profile/Profile";
+import ProductDetail from "./Views/ProductDetail/ProductDetail";
 function App() {
   const { user } = useSelector((state) => state);
   return (
@@ -20,7 +21,10 @@ function App() {
       <Route path="/" element={<DashLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/gioi-thieu" element={<IntroPage />} />
-        <Route path="/san-pham" element={<Products />} />
+        <Route path="/san-pham">
+          <Route index element={<Products />} />
+          <Route path=":productCode" element={<ProductDetail />} />
+        </Route>
         <Route path="/khuyen-mai" element={<Promotion />} />
         <Route path="/tin-tuc" element={<News />} />
         <Route path="/lien-he" element={<Contact />} />

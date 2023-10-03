@@ -35,3 +35,14 @@ export const upLoadImage = async (filesList, nameFolder, typeImage) => {
     })
   );
 };
+
+export const formatPrice = (price) => {
+  if (!!price) {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  }
+
+  return 0;
+};

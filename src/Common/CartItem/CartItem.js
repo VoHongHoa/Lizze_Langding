@@ -9,6 +9,7 @@ import {
 } from "../../redux/cartSlice";
 import "./CartItem.scss";
 import { useDispatch } from "react-redux";
+import { formatPrice } from "../../Helper/helper";
 const CartItem = (props) => {
   const dispatch = useDispatch();
   const handleRemoveProduct = () => {
@@ -40,7 +41,7 @@ const CartItem = (props) => {
       <div className="cart-item-infor">
         <div className="cart-item-infor-main">
           <span className="tag-name">{props.data.productName}</span>
-          <span className="tag-price">{props.data.price}</span>
+          <span className="tag-price">{formatPrice(props.data.price)}</span>
         </div>
         <div className="cart-item-infor-action">
           <div className="cart-item-infor-action-quantity">

@@ -5,6 +5,7 @@ import CartItem from "../../../CartItem/CartItem";
 
 import "./CartComponent.scss";
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../../../../Helper/helper";
 
 const CartComponent = () => {
   const { user, cart } = useSelector((state) => state);
@@ -69,7 +70,7 @@ const CartComponent = () => {
                       color: "red",
                     }}
                   >
-                    {cart.total}{" "}
+                    {formatPrice(cart.total)}
                   </span>
                 </div>
                 <div className="card-footer-action display-flex">

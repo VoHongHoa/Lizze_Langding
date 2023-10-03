@@ -1,0 +1,51 @@
+.product-detail-container {
+  padding: 15px;
+  .top-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .left-container {
+      width: 65%;
+      .top-main-info-container {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+
+        .img-container {
+          width: 30%;
+          img {
+            width: 100%;
+          }
+        }
+        .main-infor {
+          .product-other-infor {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+          }
+        }
+      }
+
+      .bot-main-info-conatiner {
+      }
+    }
+
+    .right-container {
+      width: 25%;
+      .policy-container {
+        background-color: gainsboro;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+    }
+  }
+
+  .bottom-container {
+  }
+}
