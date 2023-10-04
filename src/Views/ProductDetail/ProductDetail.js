@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductDetail.scss";
 import { useParams } from "react-router-dom";
 import * as ProductService from "../../Service/ProductService";
-import { Divider, Rate, Spin, Tabs } from "antd";
+import { Divider, Rate, Spin, Tabs, notification } from "antd";
 import defaultImage from "../../assets/default.jpg";
 import {
   ContainerOutlined,
@@ -11,11 +11,23 @@ import {
   RedoOutlined,
 } from "@ant-design/icons";
 import { formatPrice } from "../../Helper/helper";
+import SameProduct from "./SameProduct/SameProduct";
+import ReviewTab from "./ReviewTab/ReviewTab";
+import OtherReview from "./OtherReview/OtherReview";
 
 const ProductDetail = () => {
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (type, placement, message) => {
+    api[type]({
+      message: `Thông báo`,
+      description: message,
+      placement,
+    });
+  };
   const { productCode } = useParams();
   const [productDetail, setProductDetail] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [activeKey, setActiveKey] = useState("1");
 
   const getproductDetail = async (productCode) => {
     setIsLoading(true);
@@ -37,12 +49,60 @@ const ProductDetail = () => {
     }
   };
 
+  const onChange = (key) => {
+    // console.log(key);
+    setActiveKey(key);
+  };
+  const items = [
+    {
+      key: "1",
+      label: "Mô tả sản phẩm",
+      children: (
+        <div
+          className="product-desc"
+          dangerouslySetInnerHTML={{
+            __html: productDetail.description
+              ? productDetail.description
+              : "Sản phẩm không có mô tả chi tiết",
+          }}
+        ></div>
+      ),
+    },
+    {
+      key: "2",
+      label: "Thông số sản phẩm",
+      children: "Thông số của sản phẩm",
+    },
+    {
+      key: "3",
+      label: "Đánh giá và bình luận",
+      children: (
+        <ReviewTab
+          productCode={productCode}
+          openNotification={openNotification}
+        />
+      ),
+    },
+
+    {
+      key: "4",
+      label: "Xem các đánh giá khác",
+      children: (
+        <OtherReview
+          productCode={productCode}
+          openNotification={openNotification}
+        />
+      ),
+    },
+  ];
+
   useEffect(() => {
     getproductDetail(productCode);
   }, [productCode]);
 
   return (
     <Spin spinning={isLoading}>
+      {contextHolder}
       <div className="product-detail-container">
         <div className="top-container">
           <div className="left-container">
@@ -76,13 +136,18 @@ const ProductDetail = () => {
 
                 <Divider />
                 <p className="price"> {formatPrice(productDetail?.price)}</p>
-                <div className="desc-container">Mô tả của sản phẩm</div>
+                <div className="desc-container">Thông số của sản phẩm</div>
                 <Divider />
               </div>
             </div>
 
             <div className="bot-main-info-conatiner">
-              <Tabs />
+              <Tabs
+                activeKey={activeKey}
+                items={items}
+                onChange={onChange}
+                size="large"
+              />
             </div>
           </div>
 
@@ -113,6 +178,14 @@ const ProductDetail = () => {
                 Thanh toán online hoặc khi nhận được hàng
               </span>
             </div>
+
+            <SameProduct
+              categoriesCode={productDetail.CategoriesObject?.categoriesCode}
+              productRelate={
+                !!productDetail.productCode ? productDetail.productCode : ""
+              }
+              openNotification={openNotification}
+            />
           </div>
         </div>
 

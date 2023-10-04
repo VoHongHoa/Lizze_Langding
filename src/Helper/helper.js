@@ -46,3 +46,10 @@ export const formatPrice = (price) => {
 
   return 0;
 };
+
+export const formatRatingValue = (ratingValue) => {
+  if (!!ratingValue) {
+    return ratingValue.toFixed(2);
+  }
+  return 0.0;
+};

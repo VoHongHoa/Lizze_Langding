@@ -52,12 +52,12 @@ const ShippingInfomation = (props) => {
               <ArrowLeftOutlined /> Thông tin hóa đơn
             </span>
             <div className="shipping-information-action_btn">
-              <button
+              {/* <button
                 className="pointer btn-common"
                 onClick={() => handleGoToNextStep(2)}
               >
                 Thanh toán online
-              </button>
+              </button> */}
               <button
                 className="pointer btn-common"
                 onClick={props.handleCreateInvoice}

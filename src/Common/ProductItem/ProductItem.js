@@ -11,6 +11,7 @@ import {
 import QuickViewItem from "./QuickViewItem/QuickViewItem";
 import { useNavigate } from "react-router-dom";
 import * as helper from "../../Helper/helper";
+import { addNewWhiteListProduct } from "../../Service/WhiteListService";
 const ProductItem = (props) => {
   const dispatch = useDispatch();
 
@@ -28,6 +29,25 @@ const ProductItem = (props) => {
   const handleCloseQuickView = () => {
     setOpenQuickView(false);
   };
+
+  const handleAddToWhiteList = async () => {
+    try {
+      const data = {
+        productCode: props.data.productCode,
+      };
+      const res = await addNewWhiteListProduct(data);
+      if (res && res.status === 200 && res.data.success === true) {
+        props.openNotification(
+          "success",
+          "topRight",
+          "Thêm sản phẩm yêu thích thành công"
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handleViewDetailProduct = () => {
     navigate(`/san-pham/${props.data.productCode}`);
   };
@@ -48,7 +68,7 @@ const ProductItem = (props) => {
           <ShoppingOutlined onClick={handleAddToCart} />
         </span>
         <span>
-          <HeartOutlined />
+          <HeartOutlined onClick={handleAddToWhiteList} />
         </span>
         <span>
           <EyeOutlined onClick={handleOpenQuickView} />

@@ -9,16 +9,25 @@ import { logout } from "../../redux/userSlice";
 import "./Profile.scss";
 import CustomerInformation from "./CustomerInformation/CustomerInformation";
 import Invoice from "./Invoice/Invoice";
+import WhiteList from "./WhiteList/WhiteList";
+import { useLocation } from "react-router-dom";
 
 const Profile = () => {
+  const { state } = useLocation();
+
   const [customerInfor, setCustomerInfor] = useState({});
-  const [keyChildren, setKeyChildren] = useState("1");
+  const [keyChildren, setKeyChildren] = useState(
+    state.keyActive || "CUSTOMER_PROFILE"
+  );
 
   const [api, contextHolder] = notification.useNotification();
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useSelector((state) => state);
+
   const dispatch = useDispatch();
+
+  console.log(state);
 
   const openNotification = (type, placement, message) => {
     api[type]({
@@ -56,7 +65,7 @@ const Profile = () => {
   };
   const renderChildren = () => {
     switch (keyChildren) {
-      case "1":
+      case "CUSTOMER_PROFILE":
         return (
           <CustomerInformation
             customerInfor={customerInfor}
@@ -72,7 +81,7 @@ const Profile = () => {
             handleUpdateCustomerInfor={handleUpdateCustomerInfor}
           />
         );
-      case "3":
+      case "CUSTOMER_INVOICE":
         return (
           <Invoice
             customerInfor={customerInfor}
@@ -88,14 +97,8 @@ const Profile = () => {
             handleUpdateCustomerInfor={handleUpdateCustomerInfor}
           />
         );
-      case "5":
-        return (
-          <CustomerInformation
-            customerInfor={customerInfor}
-            handleOnchangeInfor={handleOnchangeInfor}
-            handleUpdateCustomerInfor={handleUpdateCustomerInfor}
-          />
-        );
+      case "CUSTOMER_WHITELIST":
+        return <WhiteList openNotification={openNotification} />;
 
       default:
         break;
@@ -109,7 +112,7 @@ const Profile = () => {
   };
   const profileMenuItem = [
     {
-      key: "1",
+      key: "CUSTOMER_PROFILE",
       label: "Thông tin tài khoản",
       // icon: <BellOutlined />
     },
@@ -118,7 +121,7 @@ const Profile = () => {
       label: "Thông báo",
     },
     {
-      key: "3",
+      key: "CUSTOMER_INVOICE",
       label: "Đơn hàng",
     },
     {
@@ -126,7 +129,7 @@ const Profile = () => {
       label: "Sản phẩm vừa xem",
     },
     {
-      key: "5",
+      key: "CUSTOMER_WHITELIST",
       label: "Sản phẩm yêu thích",
     },
   ];

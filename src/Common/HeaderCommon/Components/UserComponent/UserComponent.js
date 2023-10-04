@@ -5,13 +5,30 @@ import {
   PoweroffOutlined,
   SolutionOutlined,
   ContainerOutlined,
+  HeartOutlined,
 } from "@ant-design/icons";
 import { logout } from "../../../../redux/userSlice";
 const UserComponent = (props) => {
   const { user } = useSelector((state) => state);
+
+  const handleGoToWhiteList = () => {
+    props.navigate("ho-so-ca-nhan", {
+      state: {
+        keyActive: "CUSTOMER_WHITELIST",
+      },
+    });
+  };
+
+  const handleGoToCustomerInvoice = () => {
+    props.navigate("ho-so-ca-nhan", {
+      state: {
+        keyActive: "CUSTOMER_INVOICE",
+      },
+    });
+  };
   const items = [
     {
-      key: "ho-so-ca-nhan",
+      key: "CUSTOMER_PROFILE",
       label: (
         <span
           className="span-inline"
@@ -22,15 +39,23 @@ const UserComponent = (props) => {
       ),
     },
     {
-      key: "2",
+      key: "CUSTOMER_INVOICE",
       label: (
-        <span className="span-inline" onClick={() => props.dispatch(logout())}>
+        <span className="span-inline" onClick={handleGoToCustomerInvoice}>
           <ContainerOutlined style={{ fontSize: 16 }} /> Đơn hàng của bạn
         </span>
       ),
     },
     {
-      key: "3",
+      key: "CUSTOMER_WHITELIST",
+      label: (
+        <span className="span-inline" onClick={handleGoToWhiteList}>
+          <HeartOutlined style={{ fontSize: 16 }} /> Sản phẩm yêu thích
+        </span>
+      ),
+    },
+    {
+      key: "LOG_OUT",
       label: (
         <span className="span-inline" onClick={() => props.dispatch(logout())}>
           <PoweroffOutlined style={{ fontSize: 16 }} /> Đăng xuất
